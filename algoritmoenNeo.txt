@@ -64,5 +64,10 @@ MATCH (n:catedratico {name: 'Roberto'})
 MATCH (p:cuso {name: 'Fisica 2'}) 
 CREATE (n)-[:DA]->(p)
 
-
+//Catedrático 3
+MATCH (n:catedratico {name: 'Fredy'}) 
+MATCH (p:cuso {name: 'Calculo 2'}) 
+MATCH (o:cuso {name: 'Alebra Lineal'}) 
+CREATE (n)-[:DA]->(p) 
+CREATE (n)-[:DA]->(o)
 
