@@ -13,5 +13,56 @@ CREATE (armando: catedratico {name: 'Fredy', especializacion:'algebra'})
 CREATE (marcela: catedratico {name: 'Marcela', especializacion:'matematico'})
 CREATE (roberto: catedratico {name: 'Roberto', especializacion:'fisica'})
 
+//Se crean cursos 
+CREATE (algebra: cuso {name: 'Alebra Lineal'})
+CREATE (calculo: cuso {name: 'Calculo 2'})
+CREATE (fisica: cuso {name: 'Fisica2'})
+
+//Se crean las relaciones de cursos alumnos y catedraticos
+//a calculo2
+MATCH (n:estudiante {name: 'Pedro'}) 
+MATCH (m:estudiante {name: 'Joice'}) 
+MATCH (o:estudiante {name: 'Pablo'})
+MATCH (q:estudiante {name: 'Hugo'})
+MATCH (p:cuso {name: 'Calculo 2'}) 
+CREATE (n)-[:LLEVA]->(p) 
+CREATE (m)-[:LLEVA]->(p) 
+CREATE (o)-[:LLEVA]->(p)
+CREATE (q)-[:LLEVA]->(p)
+
+//a fisica 2
+MATCH (n:estudiante {name: 'Diego'}) 
+MATCH (m:estudiante {name: 'Joice'}) 
+MATCH (o:estudiante {name: 'Pablo'})
+MATCH (q:estudiante {name: 'Fredy'})
+MATCH (p:cuso {name: 'Fisica 2'}) 
+CREATE (n)-[:LLEVA]->(p) 
+CREATE (m)-[:LLEVA]->(p) 
+CREATE (o)-[:LLEVA]->(p)
+CREATE (q)-[:LLEVA]->(p)
+
+//a algebra
+MATCH (n:estudiante {name: 'Pedro'}) 
+MATCH (m:estudiante {name: 'Fredy'}) 
+MATCH (o:estudiante {name: 'Diego'})
+MATCH (q:estudiante {name: 'Edgar'})
+MATCH (p:cuso {name: 'Alebra Lineal'}) 
+CREATE (n)-[:LLEVA]->(p) 
+CREATE (m)-[:LLEVA]->(p) 
+CREATE (o)-[:LLEVA]->(p)
+CREATE (q)-[:LLEVA]->(p)
+
+//Catedrático 1
+MATCH (n:catedratico {name: 'Marcela'}) 
+MATCH (p:cuso {name: 'Calculo 2'}) 
+MATCH (o:cuso {name: 'Alebra Lineal'}) 
+CREATE (n)-[:DA]->(p) 
+CREATE (n)-[:DA]->(o)
+
+//Catedrático 2
+MATCH (n:catedratico {name: 'Roberto'}) 
+MATCH (p:cuso {name: 'Fisica 2'}) 
+CREATE (n)-[:DA]->(p)
+
 
 
