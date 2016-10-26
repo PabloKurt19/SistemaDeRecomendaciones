@@ -1,0 +1,17 @@
+
+//Se crean Estudiantes 
+CREATE (hugo: estudiante {carrera:'Electronica',name: 'Hugo', enfoque:'fisico'})
+CREATE (pedro: estudiante {carrera:'Mecatronica',name: 'Pedro', enfoque:'matematico'})
+CREATE (joice: estudiante {carrera:'Computacion',name: 'Joice', enfoque:'matematico'})
+CREATE (pablo: estudiante {carrera:'Electronica',name: 'Pablo', enfoque:'matematico'})
+CREATE (edgar: estudiante {carrera:'Electronica',name: 'Edgar', enfoque:'fisico'})
+CREATE (diego: estudiante {carrera:'Mecatronica',name: 'Diego', enfoque:'algebra'})
+CREATE (fredy: estudiante {carrera:'Mecatronica',name: 'Fredy', enfoque:'algebra'})
+
+//Se crean catedráticos
+CREATE (armando: catedratico {name: 'Fredy', especializacion:'algebra'})
+CREATE (marcela: catedratico {name: 'Marcela', especializacion:'matematico'})
+CREATE (roberto: catedratico {name: 'Roberto', especializacion:'fisica'})
+
+
+
