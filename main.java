@@ -1,3 +1,9 @@
+/**
+ * @author Pablo Ortiz, Pedro Garcia, Hugo Elvira, Edgar Ramirez
+ * @version 16.11.16
+ */
+
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -47,7 +53,7 @@ public class main {
 	private String curso;
 	private String intereses;
 	private Vector <String> resultado;
-	private JTextField textField1;
+	private Vector <String> resultado2;
 	private JButton boton5;
 	private JLabel label6;
 	private JLabel label7;
@@ -56,6 +62,9 @@ public class main {
 	private JTextArea textArea2;
 	private JLabel label8;
 	private JButton boton7;
+	private JLabel label9;
+	private JLabel label10;
+	private JLabel label11;
 
 	/**
 	 * Launch the application.
@@ -167,7 +176,7 @@ public class main {
 		comboModelos.setVisible(true);
 		
 		comboAlgebra = new JComboBox();
-		comboAlgebra.setModel(new DefaultComboBoxModel(new String[] {"Practico","ConocimientosMecanicos", "ConocimientosAnaliticos"}));
+		comboAlgebra.setModel(new DefaultComboBoxModel(new String[] {"Practico","ConocimientosMecanicos", "ConocimientoAnaliticos"}));
 		comboAlgebra.setBounds(325, 105, 135, 33);
 		panel2.add(comboAlgebra);
 		comboAlgebra.setVisible(false);
@@ -179,7 +188,7 @@ public class main {
 		comboEcuas.setVisible(false);
 		
 		textArea1 = new JTextArea();
-		textArea1.setBounds(56, 273, 438, 196);
+		textArea1.setBounds(70, 263, 412, 129);
 		panel2.add(textArea1);
 		
 		boton2 = new JButton("Seleccionar Curso");
@@ -188,7 +197,8 @@ public class main {
 		boton2.addActionListener(new MiListener());
 		
 		boton3 = new JButton("Salir");
-		boton3.setBounds(363, 528, 97, 25);
+		boton3.setFont(new Font("Arial", Font.PLAIN, 16));
+		boton3.setBounds(82, 536, 390, 45);
 		panel2.add(boton3);
 		
 		boton4 = new JButton("Buscar Recomendaciones");
@@ -196,10 +206,15 @@ public class main {
 		boton4.setBounds(304, 167, 177, 25);
 		panel2.add(boton4);
 		
-		textField1 = new JTextField();
-		textField1.setBounds(56, 238, 438, 22);
-		panel2.add(textField1);
-		textField1.setColumns(10);
+		label10 = new JLabel("");
+		label10.setFont(new Font("Arial", Font.PLAIN, 16));
+		label10.setBounds(27, 205, 467, 45);
+		panel2.add(label10);
+		
+		label11 = new JLabel("");
+		label11.setIcon(new ImageIcon("C:\\Users\\usuario\\Documents\\Universidad\\4to. Semestre\\Algor\u00EDtmos y Estructura de Datos\\Proyecto2SistemaDeRecomendaciones\\src\\einstein.png"));
+		label11.setBounds(70, 405, 412, 118);
+		panel2.add(label11);
 		boton3.addActionListener(new MiListener());
 		
 		panel3 = new JPanel();
@@ -208,18 +223,18 @@ public class main {
 		
 		label6 = new JLabel("New label");
 		label6.setIcon(new ImageIcon("C:\\Users\\usuario\\Documents\\Universidad\\4to. Semestre\\Algor\u00EDtmos y Estructura de Datos\\Proyecto2SistemaDeRecomendaciones\\src\\equipo.png"));
-		label6.setBounds(78, 33, 397, 189);
+		label6.setBounds(78, 65, 397, 189);
 		panel3.add(label6);
 		
 		label7 = new JLabel("Intereses");
 		label7.setFont(new Font("Arial", Font.PLAIN, 16));
-		label7.setBounds(150, 235, 86, 29);
+		label7.setBounds(151, 254, 86, 29);
 		panel3.add(label7);
 		
 		comboIntereses = new JComboBox();
 		comboIntereses.setFont(new Font("Arial", Font.PLAIN, 15));
 		comboIntereses.setModel(new DefaultComboBoxModel(new String[] {"Artisticos", "Academicos", "Deportivos", "Entretenimiento"}));
-		comboIntereses.setBounds(114, 277, 143, 34);
+		comboIntereses.setBounds(114, 296, 143, 34);
 		panel3.add(comboIntereses);
 		
 		boton6 = new JButton("Salir");
@@ -228,17 +243,22 @@ public class main {
 		boton6.addActionListener(new MiListener());
 		
 		textArea2 = new JTextArea();
-		textArea2.setBounds(78, 364, 397, 96);
+		textArea2.setBounds(78, 383, 397, 96);
 		panel3.add(textArea2);
 		
 		label8 = new JLabel("Los CLUBS recomendados son:");
 		label8.setFont(new Font("Arial", Font.PLAIN, 16));
-		label8.setBounds(89, 324, 273, 27);
+		label8.setBounds(89, 343, 273, 27);
 		panel3.add(label8);
 		
 		boton7 = new JButton("Buscar Club");
-		boton7.setBounds(316, 277, 130, 34);
+		boton7.setBounds(317, 296, 130, 34);
 		panel3.add(boton7);
+		
+		label9 = new JLabel("Sistema de Recomendaci\u00F3n de Clubs");
+		label9.setFont(new Font("Arial", Font.PLAIN, 20));
+		label9.setBounds(89, 29, 368, 29);
+		panel3.add(label9);
 		boton7.addActionListener(new MiListener());
 		
 		cl.show(panelCont, "1");
@@ -252,7 +272,7 @@ public class main {
 			if(e.getSource()==boton1){
 				cl.show(panelCont, "2");
 				baseDeDatos.Conectar();
-				textField1.setText("");
+				label10.setText("");
 				textArea1.setText(" ");
 				comboModelos.disable();
 				comboCalculo.disable();
@@ -438,9 +458,9 @@ public class main {
 					
 					enfoque = (String) comboEcuas.getSelectedItem();
 				}
-				textField1.setText("");
+				label10.setText("");
 				textArea1.setText(" ");
-				textField1.setText("Los catedráticos recomendados para el curso de "+curso+" son:");
+				label10.setText("Los catedráticos recomendados para el curso de "+curso+" son:");
 				
 				resultado = baseDeDatos.getRecomendation(enfoque);
 				
@@ -469,6 +489,10 @@ public class main {
 			//Buscar clubs recomendados
 			if(e.getSource()==boton7){
 				intereses = (String) comboIntereses.getSelectedItem();
+				
+				resultado2= baseDeDatos.getClub(intereses);
+				textArea2.setText(resultado2.toString());
+				
 			}
 		}
 	}
