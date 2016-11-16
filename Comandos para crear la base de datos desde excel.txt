@@ -1,24 +1,14 @@
-
-
-//se crean los nodos
-PgSQL
+	//se crean los nodos
 CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE;
-1
-	
-CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE
 
+	//carga el archivo de excel en formato .csv
+LOAD CSV FROM "file:///personas.csv" AS row CREATE (:Person {id: toInt(row[0]), name:row[1]});
 
-
-//se crean y hacen las relaciones
-PgSQL
-CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE;
-1
-	
-CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE
+	//se hace la relacion
+USING PERIODIC COMMIT;
+LOAD CSV FROM "file:///amistades.csv" AS row
+MATCH (p1:Person {id: toInt(row[0])}), (p2:Person {id: toInt(row[1])})
+CREATE (p1)-[:KNOWS]->(p2);
 
 
 e-grafia: https://www.adictosaltrabajo.com/tutoriales/uso-practico-de-java-y-neo4j-sistema-de-recomendacion/
-
-
-//carga el archivo de excel
-LOAD CSV FROM "file:///personas.csv" AS row CREATE (:Person {id: toInt(row[0]), name:row[1]});
