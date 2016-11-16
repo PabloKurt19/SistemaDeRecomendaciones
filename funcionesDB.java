@@ -18,6 +18,7 @@ public class funcionesDB {
    
 private GraphDatabaseService graphDb;
 private Vector<String> profesores;
+private Vector<String> clubs;
 
 
       
@@ -54,7 +55,10 @@ private Vector<String> profesores;
     			);
     	
     }
-    
+
+public Vector getClub(String interes){
+	
+}
     
 public Vector getRecomendation(String enfoque){
 	
