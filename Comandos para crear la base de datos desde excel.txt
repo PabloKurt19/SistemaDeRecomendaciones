@@ -1,0 +1,20 @@
+
+
+//se crean los nodos
+PgSQL
+CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE;
+1
+	
+CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE
+
+
+
+//se crean y hacen las relaciones
+PgSQL
+CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE;
+1
+	
+CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE
+
+
+e-grafia: https://www.adictosaltrabajo.com/tutoriales/uso-practico-de-java-y-neo4j-sistema-de-recomendacion/
