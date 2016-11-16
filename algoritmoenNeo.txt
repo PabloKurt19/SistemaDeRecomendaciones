@@ -1,73 +1,94 @@
+// Crear cursos
+CREATE (Ca1:Curso {name:'Calculo1'})
+CREATE (Ca2:Curso {name:'Calculo2'})
+CREATE (Ca3:Curso {name:'Calculo3'})
+CREATE (AL:Curso {name:'Algebra Lineal'})
+CREATE (ED:Curso {name:'Ecuaciones Diferenciales'})
+CREATE (MM:Curso {name:'Modelos Matematicos'})
 
-//Se crean Estudiantes 
-CREATE (hugo: estudiante {carrera:'Electronica',name: 'Hugo', enfoque:'fisico'})
-CREATE (pedro: estudiante {carrera:'Mecatronica',name: 'Pedro', enfoque:'matematico'})
-CREATE (joice: estudiante {carrera:'Computacion',name: 'Joice', enfoque:'matematico'})
-CREATE (pablo: estudiante {carrera:'Electronica',name: 'Pablo', enfoque:'matematico'})
-CREATE (edgar: estudiante {carrera:'Electronica',name: 'Edgar', enfoque:'fisico'})
-CREATE (diego: estudiante {carrera:'Mecatronica',name: 'Diego', enfoque:'algebra'})
-CREATE (fredy: estudiante {carrera:'Mecatronica',name: 'Fredy', enfoque:'algebra'})
+// Crear Especialidad
+	// Modelos
+CREATE (Ing:Especialidad {name:'Ingenieria'})
+CREATE (Bio:Especialidad {name:'Biologia'})
+	// Algebra Lineal
+CREATE (Pra:Especialidad {name:'Practico'}) 
+CREATE (C_M:Especialidad {name:'Conociminetos Mecanicos'})
+CREATE (C_A:Especialidad {name:'Conociminetos Analiticos'})
+	// Ecuas
+CREATE (Mat:Especialidad {name:'Matematico'})
+CREATE (Fis:Especialidad {name:'Fisico'})
+	// Calculo 1
+CREATE (Ana:Especialidad {name:'Analisis'})
+CREATE (Mec:Especialidad {name:'Mecanico'})
+	// Calculo2 
+CREATE (Prep:Especialidad {name:'Preparacion Calculo 3'})
+CREATE (UCa:Especialidad {name:'Ultimo Calculo'})
+	//Calculo3
+CREATE (CFun:Especialidad {name:'Conociminetos Fundamentales'})
+CREATE (Est:Especialidad {name:'Estandar'})
+CREATE (Abs:Especialidad {name:'Abstracto'})
 
-//Se crean catedráticos
-CREATE (armando: catedratico {name: 'Fredy', especializacion:'algebra'})
-CREATE (marcela: catedratico {name: 'Marcela', especializacion:'matematico'})
-CREATE (roberto: catedratico {name: 'Roberto', especializacion:'fisica'})
+// Crear catedratico
+	//Modelos
+CREATE (Euler:Catedratico {name:'Euler'})
+CREATE (Sheny:Catedratico {name:'Sheny'})
+CREATE (MAC:Catedratico {name:'MAC'})
+CREATE (Aris:Catedratico {name:'Aristoteles'})
+CREATE (Esme:Catedratico {name:'Esmeralda'})
+CREATE (Rol:Catedratico {name:'Rolando'})
+CREATE (McG:Catedratico {name:'McGonagall'})
+CREATE (Suc:Catedratico {name:'Sucely'})
+CREATE (Nad:Catedratico {name:'Nadira'})
+	//Calculo1
+CREATE (Bran:Catedratico {name:'Brandon'})
+	//Calculo3
+CREATE (Mar:Catedratico {name:'Marly'})
+	//Ecuas
+CREATE (Juan:Catedratico {name:'Juan Andres'})
+CREATE (LuisMi:Catedratico {name:'Luis Miguel'})
 
-//Se crean cursos 
-CREATE (algebra: cuso {name: 'Alebra Lineal'})
-CREATE (calculo: cuso {name: 'Calculo 2'})
-CREATE (fisica: cuso {name: 'Fisica2'})
+//Relaciones
+	//Modelos
+MATCH (Euler:Catedratico {name: 'Euler'}) 
+MATCH (Ing:Especialidad {name: 'Ingenieria'}) 
+CREATE (Euler)-[:Orienta]->(Ing)
 
-//Se crean las relaciones de cursos alumnos y catedraticos
-//a calculo2
-MATCH (n:estudiante {name: 'Pedro'}) 
-MATCH (m:estudiante {name: 'Joice'}) 
-MATCH (o:estudiante {name: 'Pablo'})
-MATCH (q:estudiante {name: 'Hugo'})
-MATCH (p:cuso {name: 'Calculo 2'}) 
-CREATE (n)-[:LLEVA]->(p) 
-CREATE (m)-[:LLEVA]->(p) 
-CREATE (o)-[:LLEVA]->(p)
-CREATE (q)-[:LLEVA]->(p)
+MATCH (Sheny:Catedratico {name: 'Sheny'})
+MATCH (Ing:Especialidad {name: 'Ingenieria'}) 
+CREATE (Sheny)-[:Orienta]->(Ing)
 
-//a fisica 2
-MATCH (n:estudiante {name: 'Diego'}) 
-MATCH (m:estudiante {name: 'Joice'}) 
-MATCH (o:estudiante {name: 'Pablo'})
-MATCH (q:estudiante {name: 'Fredy'})
-MATCH (p:cuso {name: 'Fisica 2'}) 
-CREATE (n)-[:LLEVA]->(p) 
-CREATE (m)-[:LLEVA]->(p) 
-CREATE (o)-[:LLEVA]->(p)
-CREATE (q)-[:LLEVA]->(p)
 
-//a algebra
-MATCH (n:estudiante {name: 'Pedro'}) 
-MATCH (m:estudiante {name: 'Fredy'}) 
-MATCH (o:estudiante {name: 'Diego'})
-MATCH (q:estudiante {name: 'Edgar'})
-MATCH (p:cuso {name: 'Alebra Lineal'}) 
-CREATE (n)-[:LLEVA]->(p) 
-CREATE (m)-[:LLEVA]->(p) 
-CREATE (o)-[:LLEVA]->(p)
-CREATE (q)-[:LLEVA]->(p)
+MATCH (Sheny:Catedratico {name: 'Sheny'})
+MATCH (Ing:Especialidad {name: 'Ingenieria'}) 
+CREATE (Sheny)-[:Orienta]->(Ing)
 
-//Catedrático 1
-MATCH (n:catedratico {name: 'Marcela'}) 
-MATCH (p:cuso {name: 'Calculo 2'}) 
-MATCH (o:cuso {name: 'Alebra Lineal'}) 
-CREATE (n)-[:DA]->(p) 
-CREATE (n)-[:DA]->(o)
+	//Calculo1 
+		//Analisis
+MATCH (Euler:Catedratico {name: 'Euler'}) 
+MATCH (Ana:Especialidad {name: 'Analisis'})
+CREATE (Euler)-[:Orienta]->(Ana)
 
-//Catedrático 2
-MATCH (n:catedratico {name: 'Roberto'}) 
-MATCH (p:cuso {name: 'Fisica 2'}) 
-CREATE (n)-[:DA]->(p)
+MATCH (Sheny:Catedratico {name: 'Sheny'}) 
+MATCH (Ana:Especialidad {name: 'Analisis'})
+CREATE (Sheny)-[:Orienta]->(Ana)
 
-//Catedrático 3
-MATCH (n:catedratico {name: 'Fredy'}) 
-MATCH (p:cuso {name: 'Calculo 2'}) 
-MATCH (o:cuso {name: 'Alebra Lineal'}) 
-CREATE (n)-[:DA]->(p) 
-CREATE (n)-[:DA]->(o)
+		//Mecanica
+MATCH (Esme:Catedratico {name: 'Esmeralda'}) 
+MATCH (Mec:Especialidad {name: 'Mecancia'})
+CREATE (Esme)-[:Orienta]->(Mec)
+
+MATCH (Nad:Catedratico {name: 'Nadira'}) 
+MATCH (Mec:Especialidad {name: 'Mecancia'})
+CREATE (Esme)-[:Orienta]->(Mec)
+
+
+
+
+
+
+
+
+
+
+
 
