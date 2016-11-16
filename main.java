@@ -22,6 +22,9 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.SystemColor;
+import javax.swing.SwingConstants;
 
 public class main {
 
@@ -102,12 +105,14 @@ public class main {
 		cl = (CardLayout)(frame.getContentPane().getLayout());
 		
 		panel1 = new JPanel();
+		panel1.setBackground(Color.WHITE);
 		panelCont.add(panel1, "1");
 		panel1.setLayout(null);
 		
 		label1 = new JLabel("Bienvenido al Sistema de recomendacion de asignaciones");
-		label1.setFont(new Font("Arial", Font.PLAIN, 20));
-		label1.setBounds(20, 13, 526, 45);
+		label1.setHorizontalAlignment(SwingConstants.CENTER);
+		label1.setFont(new Font("Andalus", Font.PLAIN, 20));
+		label1.setBounds(32, 15, 526, 45);
 		panel1.add(label1);
 		
 		label2 = new JLabel("");
@@ -116,42 +121,52 @@ public class main {
 		panel1.add(label2);
 		
 		boton1 = new JButton("Recomendaciones Catedraticos");
-		boton1.setFont(new Font("Arial", Font.PLAIN, 12));
+		boton1.setForeground(SystemColor.text);
+		boton1.setBackground(SystemColor.desktop);
+		boton1.setFont(new Font("Andalus", Font.PLAIN, 13));
 		boton1.setBounds(274, 499, 242, 45);
 		boton1.addActionListener(new MiListener());
 		panel1.add(boton1);
 		
 		boton5 = new JButton("Recomendaciones Clubs");
-		boton5.setFont(new Font("Arial", Font.PLAIN, 12));
+		boton5.setForeground(SystemColor.text);
+		boton5.setBackground(SystemColor.desktop);
+		boton5.setFont(new Font("Andalus", Font.PLAIN, 13));
 		boton5.setBounds(20, 499, 242, 45);
 		panel1.add(boton5);
 		boton5.addActionListener(new MiListener());
 		
 		panel2 = new JPanel();
+		panel2.setBackground(new Color(30, 144, 255));
 		panelCont.add(panel2, "2");
 		panel2.setLayout(null);
 		
 		label3 = new JLabel("Sistema de Recomendacion de Asignaciones");
-		label3.setFont(new Font("Arial", Font.PLAIN, 20));
+		label3.setHorizontalAlignment(SwingConstants.CENTER);
+		label3.setFont(new Font("Andalus", Font.PLAIN, 22));
 		label3.setBounds(82, 13, 412, 45);
 		panel2.add(label3);
 		
 		label4 = new JLabel("Curso");
-		label4.setFont(new Font("Arial", Font.PLAIN, 16));
+		label4.setFont(new Font("Andalus", Font.PLAIN, 16));
 		label4.setBounds(119,59,52,33);
 		panel2.add(label4);
 		
 		combo1 = new JComboBox();
+		combo1.setBackground(SystemColor.inactiveCaption);
+		combo1.setFont(new Font("Andalus", Font.PLAIN, 13));
 		combo1.setModel(new DefaultComboBoxModel(new String[] {"Modelos Matematicos", "Calculo 1", "Calculo 2", "Calculo 3", "Algebra Lineal 1", "Ecuaciones Diferenciales 1"}));
-		combo1.setBounds(82, 105, 135, 33);
+		combo1.setBounds(70, 105, 154, 33);
 		panel2.add(combo1);
 		
 		label5 = new JLabel("Enfoque");
-		label5.setFont(new Font("Arial", Font.PLAIN, 16));
+		label5.setFont(new Font("Andalus", Font.PLAIN, 16));
 		label5.setBounds(358,59,66,33);
 		panel2.add(label5);
 		
 		comboCalculo = new JComboBox();
+		comboCalculo.setBackground(SystemColor.inactiveCaption);
+		comboCalculo.setFont(new Font("Andalus", Font.PLAIN, 13));
 		comboCalculo.setModel(new DefaultComboBoxModel(new String[] {"Analisis", "Mecanico"}));
 		comboCalculo.setBounds(325, 105, 135, 33);
 		panel2.add(comboCalculo);
@@ -192,22 +207,26 @@ public class main {
 		panel2.add(textArea1);
 		
 		boton2 = new JButton("Seleccionar Curso");
+		boton2.setBackground(SystemColor.inactiveCaption);
+		boton2.setFont(new Font("Andalus", Font.PLAIN, 13));
 		boton2.setBounds(70, 167, 166, 25);
 		panel2.add(boton2);
 		boton2.addActionListener(new MiListener());
 		
 		boton3 = new JButton("Salir");
-		boton3.setFont(new Font("Arial", Font.PLAIN, 16));
+		boton3.setFont(new Font("Andalus", Font.PLAIN, 16));
 		boton3.setBounds(82, 536, 390, 45);
 		panel2.add(boton3);
 		
 		boton4 = new JButton("Buscar Recomendaciones");
+		boton4.setBackground(SystemColor.inactiveCaption);
+		boton4.setFont(new Font("Andalus", Font.PLAIN, 13));
 		boton4.addActionListener(new MiListener());
 		boton4.setBounds(304, 167, 177, 25);
 		panel2.add(boton4);
 		
 		label10 = new JLabel("");
-		label10.setFont(new Font("Arial", Font.PLAIN, 16));
+		label10.setFont(new Font("Andalus", Font.PLAIN, 14));
 		label10.setBounds(27, 205, 467, 45);
 		panel2.add(label10);
 		
@@ -218,6 +237,7 @@ public class main {
 		boton3.addActionListener(new MiListener());
 		
 		panel3 = new JPanel();
+		panel3.setBackground(new Color(50, 205, 50));
 		panelCont.add(panel3, "3");
 		panel3.setLayout(null);
 		
@@ -227,17 +247,21 @@ public class main {
 		panel3.add(label6);
 		
 		label7 = new JLabel("Intereses");
-		label7.setFont(new Font("Arial", Font.PLAIN, 16));
+		label7.setFont(new Font("Andalus", Font.PLAIN, 16));
 		label7.setBounds(151, 254, 86, 29);
 		panel3.add(label7);
 		
 		comboIntereses = new JComboBox();
-		comboIntereses.setFont(new Font("Arial", Font.PLAIN, 15));
+		comboIntereses.setBackground(new Color(30, 144, 255));
+		comboIntereses.setFont(new Font("Andalus", Font.PLAIN, 15));
 		comboIntereses.setModel(new DefaultComboBoxModel(new String[] {"Artisticos", "Academicos", "Deportivos", "Entretenimiento"}));
 		comboIntereses.setBounds(114, 296, 143, 34);
 		panel3.add(comboIntereses);
 		
 		boton6 = new JButton("Salir");
+		boton6.setForeground(new Color(240, 248, 255));
+		boton6.setBackground(new Color(30, 144, 255));
+		boton6.setFont(new Font("Andalus", Font.PLAIN, 20));
 		boton6.setBounds(78, 499, 397, 55);
 		panel3.add(boton6);
 		boton6.addActionListener(new MiListener());
@@ -247,16 +271,20 @@ public class main {
 		panel3.add(textArea2);
 		
 		label8 = new JLabel("Los CLUBS recomendados son:");
-		label8.setFont(new Font("Arial", Font.PLAIN, 16));
+		label8.setFont(new Font("Andalus", Font.PLAIN, 16));
 		label8.setBounds(89, 343, 273, 27);
 		panel3.add(label8);
 		
 		boton7 = new JButton("Buscar Club");
+		boton7.setForeground(new Color(240, 248, 255));
+		boton7.setBackground(new Color(30, 144, 255));
+		boton7.setFont(new Font("Andalus", Font.PLAIN, 14));
 		boton7.setBounds(317, 296, 130, 34);
 		panel3.add(boton7);
 		
 		label9 = new JLabel("Sistema de Recomendaci\u00F3n de Clubs");
-		label9.setFont(new Font("Arial", Font.PLAIN, 20));
+		label9.setHorizontalAlignment(SwingConstants.CENTER);
+		label9.setFont(new Font("Andalus", Font.PLAIN, 23));
 		label9.setBounds(89, 29, 368, 29);
 		panel3.add(label9);
 		boton7.addActionListener(new MiListener());
