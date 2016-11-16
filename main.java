@@ -2,6 +2,8 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +15,7 @@ import java.awt.CardLayout;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class main {
 
@@ -35,9 +38,15 @@ public class main {
 	private JComboBox comboModelos;
 	private JComboBox comboAlgebra;
 	private JComboBox comboEcuas;
-	private JTextArea textArea;
+	private JTextArea textArea1;
 	private JButton boton2;
 	private JButton boton3;
+	private JButton boton4;
+	private funcionesDB baseDeDatos;
+	private String enfoque;
+	private String curso;
+	private Vector <String> resultado;
+	private JTextField textField1;
 
 	/**
 	 * Launch the application.
@@ -66,6 +75,7 @@ public class main {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		baseDeDatos = new funcionesDB();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 576, 641);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -124,13 +134,13 @@ public class main {
 		comboCalculo.setVisible(false);
 		
 		comboCalculo2 = new JComboBox();
-		comboCalculo2.setModel(new DefaultComboBoxModel(new String[] {"Preparatorio C3", "Ultimo Calculo"}));
+		comboCalculo2.setModel(new DefaultComboBoxModel(new String[] {"PreparatorioCalculo3", "UltimoCalculo"}));
 		comboCalculo2.setBounds(325, 105, 135, 33);
 		panel2.add(comboCalculo2);
 		comboCalculo2.setVisible(false);
 		
 		comboCalculo3 = new JComboBox();
-		comboCalculo3.setModel(new DefaultComboBoxModel(new String[] {"Conocimientos Fundamentales", "Estandar", "Abstracto"}));
+		comboCalculo3.setModel(new DefaultComboBoxModel(new String[] {"ConocimientosFundamentales", "Estandar", "Abstracto"}));
 		comboCalculo3.setBounds(325, 105, 135, 33);
 		panel2.add(comboCalculo3);
 		comboCalculo3.setVisible(false);
@@ -142,7 +152,7 @@ public class main {
 		comboModelos.setVisible(true);
 		
 		comboAlgebra = new JComboBox();
-		comboAlgebra.setModel(new DefaultComboBoxModel(new String[] {"Practico","Conocimientos Mecanicos", "Conocimientos Analiticos"}));
+		comboAlgebra.setModel(new DefaultComboBoxModel(new String[] {"Practico","ConocimientosMecanicos", "ConocimientosAnaliticos"}));
 		comboAlgebra.setBounds(325, 105, 135, 33);
 		panel2.add(comboAlgebra);
 		comboAlgebra.setVisible(false);
@@ -153,18 +163,28 @@ public class main {
 		panel2.add(comboEcuas);
 		comboEcuas.setVisible(false);
 		
-		textArea = new JTextArea();
-		textArea.setBounds(82, 219, 378, 250);
-		panel2.add(textArea);
+		textArea1 = new JTextArea();
+		textArea1.setBounds(56, 273, 438, 196);
+		panel2.add(textArea1);
 		
 		boton2 = new JButton("Seleccionar Curso");
-		boton2.setBounds(82, 167, 135, 25);
+		boton2.setBounds(70, 167, 166, 25);
 		panel2.add(boton2);
 		boton2.addActionListener(new MiListener());
 		
 		boton3 = new JButton("Salir");
 		boton3.setBounds(363, 528, 97, 25);
 		panel2.add(boton3);
+		
+		boton4 = new JButton("Buscar Recomendaciones");
+		boton4.addActionListener(new MiListener());
+		boton4.setBounds(304, 167, 177, 25);
+		panel2.add(boton4);
+		
+		textField1 = new JTextField();
+		textField1.setBounds(56, 238, 438, 22);
+		panel2.add(textField1);
+		textField1.setColumns(10);
 		boton3.addActionListener(new MiListener());
 		
 		cl.show(panelCont, "1");
@@ -177,13 +197,30 @@ public class main {
 			//Ingresa al sistema de recomendaciones, se muestra el segundo panel
 			if(e.getSource()==boton1){
 				cl.show(panelCont, "2");
+				baseDeDatos.Conectar();
+				textField1.setText("");
+				textArea1.setText(" ");
+				comboModelos.disable();
+				comboCalculo.disable();
+				comboCalculo2.disable();
+				comboCalculo3.disable();
+				comboAlgebra.disable();
+				comboEcuas.disable();
+				boton4.disable();
 			}
 			
 			//boton2
 			//Selecciona el curso y cambia el comboBox de enfoque
 			if(e.getSource()==boton2){
-				String curso = (String) combo1.getSelectedItem();
-				System.out.println(curso);
+				curso = (String) combo1.getSelectedItem();
+				boton4.enable();
+				comboModelos.enable();
+				comboCalculo.enable();
+				comboCalculo2.enable();
+				comboCalculo3.enable();
+				comboAlgebra.enable();
+				comboEcuas.enable();
+				
 				
 				//Se selecciona Modelos
 				if(curso.equals("Modelos Matematicos")){
@@ -193,6 +230,8 @@ public class main {
 					comboCalculo3.setVisible(false);
 					comboAlgebra.setVisible(false);
 					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboModelos.getSelectedItem();
 				}
 				
 				//Se selecciona Calculo1
@@ -203,6 +242,8 @@ public class main {
 					comboCalculo3.setVisible(false);
 					comboAlgebra.setVisible(false);
 					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo.getSelectedItem();
 				}
 				
 				//Se selecciona Calculo2
@@ -213,6 +254,8 @@ public class main {
 					comboCalculo3.setVisible(false);
 					comboAlgebra.setVisible(false);
 					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo2.getSelectedItem();
 				}
 				
 				//Se selecciona Calculo3
@@ -223,6 +266,8 @@ public class main {
 					comboCalculo3.setVisible(true);
 					comboAlgebra.setVisible(false);
 					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo3.getSelectedItem();
 				}
 				
 				//Se selecciona Algebra
@@ -233,6 +278,8 @@ public class main {
 					comboCalculo3.setVisible(false);
 					comboAlgebra.setVisible(true);
 					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboAlgebra.getSelectedItem();
 				}
 				
 				//Se selecciona Ecuas
@@ -243,13 +290,108 @@ public class main {
 					comboCalculo3.setVisible(false);
 					comboAlgebra.setVisible(false);
 					comboEcuas.setVisible(true);
+					
+					enfoque = (String) comboEcuas.getSelectedItem();
 				}
 				
 			}
 			//boton3
 			//Sale del sistema
 			if(e.getSource()==boton3){
+				
+				baseDeDatos.apagar();
 				cl.show(panelCont, "1");
+			}
+			
+			//boton4
+			//Empieza la busqueda de recomendacion de maestros según enfoque y curso
+			if(e.getSource()==boton4){
+				curso = (String) combo1.getSelectedItem();
+				comboModelos.disable();
+				comboCalculo.disable();
+				comboCalculo2.disable();
+				comboCalculo3.disable();
+				comboAlgebra.disable();
+				comboEcuas.disable();
+				//Se selecciona Modelos
+				if(curso.equals("Modelos Matematicos")){
+					comboModelos.setVisible(true);
+					comboCalculo.setVisible(false);
+					comboCalculo2.setVisible(false);
+					comboCalculo3.setVisible(false);
+					comboAlgebra.setVisible(false);
+					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboModelos.getSelectedItem();
+				}
+				
+				//Se selecciona Calculo1
+				if(curso.equals("Calculo 1")){
+					comboModelos.setVisible(false);
+					comboCalculo.setVisible(true);
+					comboCalculo2.setVisible(false);
+					comboCalculo3.setVisible(false);
+					comboAlgebra.setVisible(false);
+					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo.getSelectedItem();
+				}
+				
+				//Se selecciona Calculo2
+				if(curso.equals("Calculo 2")){
+					comboModelos.setVisible(false);
+					comboCalculo.setVisible(false);
+					comboCalculo2.setVisible(true);
+					comboCalculo3.setVisible(false);
+					comboAlgebra.setVisible(false);
+					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo2.getSelectedItem();
+				}
+				
+				//Se selecciona Calculo3
+				if(curso.equals("Calculo 3")){
+					comboModelos.setVisible(false);
+					comboCalculo.setVisible(false);
+					comboCalculo2.setVisible(false);
+					comboCalculo3.setVisible(true);
+					comboAlgebra.setVisible(false);
+					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboCalculo3.getSelectedItem();
+				}
+				
+				//Se selecciona Algebra
+				if(curso.equals("Algebra Lineal 1")){
+					comboModelos.setVisible(false);
+					comboCalculo.setVisible(false);
+					comboCalculo2.setVisible(false);
+					comboCalculo3.setVisible(false);
+					comboAlgebra.setVisible(true);
+					comboEcuas.setVisible(false);
+					
+					enfoque = (String) comboAlgebra.getSelectedItem();
+				}
+				
+				//Se selecciona Ecuas
+				if(curso.equals("Ecuaciones Diferenciales 1")){
+					comboModelos.setVisible(false);
+					comboCalculo.setVisible(false);
+					comboCalculo2.setVisible(false);
+					comboCalculo3.setVisible(false);
+					comboAlgebra.setVisible(false);
+					comboEcuas.setVisible(true);
+					
+					enfoque = (String) comboEcuas.getSelectedItem();
+				}
+				textField1.setText("");
+				textArea1.setText(" ");
+				textField1.setText("Los catedráticos recomendados para el curso de "+curso+" son:");
+				
+				resultado = baseDeDatos.getRecomendation(enfoque);
+				textArea1.setText(resultado.toString());
+				boton4.disable();
+				
 			}
 		}
 	}
