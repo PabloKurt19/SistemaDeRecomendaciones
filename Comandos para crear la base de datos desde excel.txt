@@ -18,3 +18,7 @@ CREATE CONSTRAINT ON (p:Person) ASSERT p.userId IS UNIQUE
 
 
 e-grafia: https://www.adictosaltrabajo.com/tutoriales/uso-practico-de-java-y-neo4j-sistema-de-recomendacion/
+
+
+//carga el archivo de excel
+LOAD CSV FROM "file:///personas.csv" AS row CREATE (:Person {id: toInt(row[0]), name:row[1]});
